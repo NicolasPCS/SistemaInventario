@@ -1,0 +1,9 @@
+BD - Carpeta que contiene los snipets o querys de la db listos para ejecutar
+clases - contiene todas las clases de cada modulo, con sus respectivos metodos de crud
+css - scrpits css que serviran para dar estilo personalizado en caso de ser util
+img - todas las imagenes que necesitemos agregar a las vistas
+archivos - todas las imagenes de los productos agregados
+js - scripts js para cada modulo para ejecutar las funciones de crud
+librerias - librerias para la creacion de pdf, jquery, alertify, bootstrap y select2
+procesos - archivos intermedio entre las clases y las vistas, mandan informacion entre una y otra cosa
+vistas - todas las vistas de cada uno de los modulos
