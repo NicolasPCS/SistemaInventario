@@ -51,8 +51,92 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="abremodalUpdateArticulo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Actualizar articulo</h4>
+        </div>
+        <div class="modal-body">
+            <form id="frmArticulosU" enctype="multipart/form-data">
+                <input type="text" hidden="" id="idArticulo" name="idArticulo">
+                <label>Categoria</label>
+                <select class="form-control input-sm" name="categoriaSelectU" id="categoriaSelectU">
+                    <option value="A">Selecciona Categoria</option>
+                    <?php
+                        $sql = "select id_categoria, nombreCategoria from categorias";
+                        $result = mysqli_query($conexion,$sql);  
+                    ?>
+                    <?php while($ver = mysqli_fetch_row($result)): ?>
+                    <option value="<?php echo $ver[0]; ?>">
+                        <?php echo $ver[1]; ?>
+                    </option>
+                    <?php endwhile; ?>
+                </select>
+                <label>Nombre</label>
+                <input type="text" class="form-control input-sm" id="nombreU" name="nombreU">
+                <label>Descripcion</label>
+                <input type="text" class="form-control input-sm" id="descripcionU" name="descripcionU">
+                <label>Cantidad</label>
+                <input type="text" class="form-control input-sm" id="cantidadU" name="cantidadU">
+                <label>Precio</label>
+                <input type="text" class="form-control input-sm" id="precioU" name="precioU">
+                <p></p>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="btnActualizaarticulo" type="button" class="btn btn-warning" data-dismiss="modal">Actualizar</button>
+        </div>
+        </div>
+    </div>
+    </div>
+
 </body>
 </html>
+
+<script type="text/javascript">
+    function agregaDatosArticulo(idarticulo){
+        $.ajax({
+			type:"POST",
+			data:"idart="+idarticulo,
+			url:"../procesos/articulos/obtenDatosArticulo.php",
+			success:function(r){
+                dato = jQuery.parseJSON(r);
+                $('#idArticulo').val(dato['id_producto']);
+                $('#categoriaSelectU').val(dato['id_categoria']);
+                $('#nombreU').val(dato['nombre']);
+                $('#descripcionU').val(dato['descripcion']);
+                $('#cantidadU').val(dato['cantidad']);
+                $('#precioU').val(dato['precio']);
+			}
+		});
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#btnActualizaarticulo').click(function(){
+
+            datos=$('#frmArticulosU').serialize();
+            $.ajax({
+                type:"POST",
+                data:datos,
+                url:"../procesos/articulos/actualizaArticulos.php",
+                success:function(r){
+                    if (r == 1){
+                        $('#tablaArticulosLoad').load('articulos/tablaArticulos.php');
+                        alertify.success("Actualizado con exito");
+                    } else {
+                        alertify.error("Error al actualizar");
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function(){
