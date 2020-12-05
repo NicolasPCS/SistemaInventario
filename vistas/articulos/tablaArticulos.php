@@ -1,3 +1,15 @@
+<?php
+    require_once "../../clases/conexion.php";
+    $c = new conectar();
+    $conexion = $c->conexion();
+
+    $sql = "select art.nombre, art.descripcion, art.cantidad, art.precio, img.ruta, cat.nombreCategoria from articulos as art
+            inner join imagenes as img on art.id_imagen=img.id_imagen
+            inner join categorias as cat on art.id_categoria=cat.id_categoria";
+
+    $result = mysqli_query($conexion, $sql);
+?>
+
 <table class="table table-hover table-condensed table-bordered" style="text-align: center;">
     <caption><label>Articulos</label></caption>
     <tr>
@@ -10,13 +22,22 @@
         <td>Editar</td>
         <td>Eliminar</td>
     </tr>
+
+    <?php while($ver = mysqli_fetch_row($result)): ?>
+
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><?php echo $ver[0]; ?></td>
+        <td><?php echo $ver[1]; ?></td>
+        <td><?php echo $ver[2]; ?></td>
+        <td><?php echo $ver[3]; ?></td>
+        <td>
+            <?php 
+                $imgVer = explode("/", $ver[4]);
+                $imgruta = $imgVer[1]."/".$imgVer[2]."/".$imgVer[3];
+            ?>
+            <img width="80" height="80" src="<?php echo $imgruta ?>" alt="Imagen">
+        </td>
+        <td><?php echo $ver[5]; ?></td>
         <td>
             <span class="btn btn-warning btn-xs">
                 <span class="glyphicon glyphicon-pencil"></span>
@@ -28,4 +49,7 @@
             </span>
         </td>
     </tr>
+
+    <?php endwhile; ?>
+
 </table>
