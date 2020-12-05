@@ -23,7 +23,7 @@
     <tr>
         <td><?php echo $ver[1] ?></td>
         <td>
-            <span class="btn btn-warning btn-xs">
+            <span class="btn btn-warning btn-xs" data-toggle="modal" data-target="#actualizaCategoria" onclick="agregaDato('<?php echo $ver[0] ?>','<?php echo $ver[1] ?>')">
                 <span class="glyphicon glyphicon-pencil"></span>
             </span>
         </td>
