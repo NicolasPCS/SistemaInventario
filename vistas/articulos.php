@@ -114,6 +114,27 @@
 			}
 		});
     }
+    function eliminaArticulo(idArticulo){
+        alertify.confirm('¿Desea eliminar articulo?', 
+        function(){ 
+            $.ajax({
+                type:"POST",
+                data:"idarticulo=" + idArticulo,
+                url:"../procesos/articulos/eliminarArticulo.php",
+                success:function(r){
+                    if(r==1){
+                        $('#tablaArticulosLoad').load('articulos/tablaArticulos.php');
+                        alertify.success("Eliminado con exito");
+                    }else{
+                        alertify.error("No se pudo eliminar");
+                    }
+                }
+            });
+        }, 
+        function(){ 
+            alertify.error('Cancelado')
+        });
+    }
 </script>
 
 <script type="text/javascript">
