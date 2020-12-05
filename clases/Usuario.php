@@ -75,6 +75,13 @@
 									email='$datos[3]'
 						where id_usuario='$datos[0]'";
 			return mysqli_query($conexion,$sql);	
-		}
+        }
+        public function eliminaUsuario($idusuario){
+            $c=new conectar();
+            $conexion=$c->conexion();
+            
+            $sql = "delete from usuarios where id_usuario='$idusuario'";
+            return mysqli_query($conexion,$sql);
+        }
     }
 ?>

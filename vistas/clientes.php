@@ -62,6 +62,7 @@
                 url:"../procesos/clientes/agregaCliente.php",
                 success:function(r){
                     if (r == 1){
+                        $('#frmClientes')[0].reset();
 						$('#tablaClientesLoad').load('clientes/tablaClientes.php');
                         alertify.success("Articulo agregado con exito");
                     } else {

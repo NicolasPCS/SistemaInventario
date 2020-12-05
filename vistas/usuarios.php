@@ -79,12 +79,30 @@
             }
         });
     }
+    function eliminarUsuario(idusuario){
+        alertify.confirm('¿Desea eliminar este usuario?', function(){ 
+            $.ajax({
+                type:"POST",
+                data:"idusuario=" + idusuario,
+                url:"../procesos/usuarios/eliminarUsuario.php",
+                success:function(r){
+                    if(r==1){
+                        $('#tablaUsuariosLoad').load('usuarios/tablaUsuarios.php');
+                        alertify.success("Eliminado con exito!");
+                    }else{
+                        alertify.error("No se pudo eliminar");
+                    }
+                }
+            });
+        }, function(){ 
+            alertify.error('Cancelo !')
+        });
+    }
 </script>
 
 <script type="text/javascript">
     $(document).ready(function(){
         $('#btnActualizaUsuario').click(function(){
-
             datos=$('#frmRegistroU').serialize();
             $.ajax({
                 type:"POST",
@@ -107,7 +125,6 @@
     $(document).ready(function(){
         
         $('#tablaUsuariosLoad').load('usuarios/tablaUsuarios.php');
-
         $('#registro').click(function(){
 
             vacios = validarFormVacio('frmRegistro');
@@ -124,9 +141,9 @@
                 url:"../procesos/regLogin/registrarUsuario.php",
                 success:function(r){
                     if (r == 1){
-                        $('#frmArticulos')[0].reset();
                         $('#tablaUsuariosLoad').load('usuarios/tablaUsuarios.php');
                         alertify.alert("Usuario agregado correctamente");
+                        $('#frmArticulos')[0].reset();
                     } else {
                         alertify.error("Fallo al agregar");
                     }
