@@ -24,5 +24,24 @@
                 ) ";
             return mysqli_query($conexion,$sql);
         }
+        public function obtenDatosCliente($idcliente){
+            $obj = new conectar();
+            $conexion = $obj->conexion();
+
+            $sql = "SELECT id_cliente, nombre, apellido, direccion, email, telefono, rfc from clientes";
+
+            $result = mysqli_query($conexion,$sql);
+            $ver = mysqli_fetch_row($result);
+            $datos = array(
+                'id_cliente' => $ver[0], 
+                'nombre' => $ver[1], 
+                'apellido' => $ver[2], 
+                'direccion' => $ver[3], 
+                'email' => $ver[4], 
+                'telefono' => $ver[5], 
+                'rfc' => $ver[6]
+            );
+            return $datos;
+        }
     }
 ?>
