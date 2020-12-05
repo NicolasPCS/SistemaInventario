@@ -11,7 +11,7 @@
 <table class="table table-hover table-condensed table-bordered" style="text-align: center;">
     <caption><label>Categorias</label></caption>
     <tr>
-        <td>Caterogias</td>
+        <td>categorias</td>
         <td>Editar</td>
         <td>Eliminar</td>
     </tr>
@@ -28,7 +28,7 @@
             </span>
         </td>
         <td>
-            <span class="btn btn-danger btn-xs">
+            <span class="btn btn-danger btn-xs" onclick="eliminaCategoria('<?php echo $ver[0] ?>')">
                 <span class="glyphicon glyphicon-remove"></span>
             </span>
         </td>

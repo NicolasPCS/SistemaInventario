@@ -23,5 +23,13 @@
             echo mysqli_query($conexion, $sql);
         }
 
+        public function eliminaCategoria($idcategoria){
+            $c = new conectar();
+            $conexion = $c->conexion();
+
+            $sql = "delete from categorias where id_categoria='$idcategoria'";
+            return mysqli_query($conexion,$sql);
+        }
+
     }
 ?>
