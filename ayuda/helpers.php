@@ -63,7 +63,7 @@ https://bootsnipp.com/snippets/Kr5yV
 							$('#tablaArticulos').load('articulos/tablaArticulos.php');
 							alertify.success("Agregado con exito :D");
 						}else{
-							alertify.error("Fallo al subir el archivo :(");
+							alertify.error("Fallo al subir el archivo");
 						}
 					}
 				});

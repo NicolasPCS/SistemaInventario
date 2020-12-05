@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articulos</title>
     <?php require_once "menu.php"; ?>
+    <?php require_once "../clases/conexion.php"; 
+          $c = new conectar();
+          $conexion = $c->conexion();
+          $sql = "select id_categoria, nombreCategoria from categorias";
+          $result = mysqli_query($conexion,$sql);  
+    ?>
 </head>
 <body>
     <div class="container">
@@ -20,6 +26,11 @@
                     <label>Categoria</label>
                     <select class="form-control input-sm" name="categoriaSelect" id="categoriaSelect">
                         <option value="A">Selecciona Categoria</option>
+                        <?php while($ver = mysqli_fetch_row($result)): ?>
+                        <option value="<?php echo $ver[0]; ?>">
+                            <?php echo $ver[1]; ?>
+                        </option>
+                        <?php endwhile; ?>
                     </select>
                     <label>Nombre</label>
                     <input type="text" class="form-control input-sm" id="nombre" name="nombre">
@@ -57,16 +68,22 @@
                 return false;
             }
 
-            datos=$('#frmArticulos').serialize();
+            var formData = new FormData(document.getElementById("frmArticulos"));
             $.ajax({
-                type:"POST",
-                data:datos,
-                url:"../procesos/articulos/agregaArticulos.php",
+                url: "../procesos/articulos/insertaArticulos.php",
+                type: "post",
+                dataType: "html",
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success:function(r){
-                    if (r == 1){
-                        alertify.success("Articulo agregado con exito");
-                    } else {
-                        alertify.error("No se pudo agregar el articulo");
+                    if(r == 1){
+                        $('#frmArticulos')[0].reset();
+                        $('#tablaArticulosLoad').load('articulos/tablaArticulos.php');
+                        alertify.success("Agregado con exito");
+                    }else{
+                        alertify.error("Fallo al subir el archivo");
                     }
                 }
             });
