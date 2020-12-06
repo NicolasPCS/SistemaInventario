@@ -52,7 +52,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#" class="btn btn-danger btn-sm">
+                        <a href="../vistas/ventas/crearReportePdf.php?idventa=<?php echo $ver[0]; ?>" class="btn btn-danger btn-sm">
                         Reporte <span class="glyphicon glyphicon-file"></span>
                         </a>
                     </td>
