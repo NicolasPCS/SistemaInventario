@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <span class="btn btn-default" id="ventaProductosBtn">Vender productos</span>
-                <span class="btn btn-default" id="ventasHechasBtn">Vender hechas</span>
+                <span class="btn btn-default" id="ventasHechasBtn">Ventas hechas</span>
             </div>
         </div>
         <div class="row">
