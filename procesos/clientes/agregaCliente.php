@@ -5,7 +5,6 @@
 
     $obj = new clientes();
 
-
     $datos = array(
         $_POST['nombre'],
         $_POST['apellidos'],
